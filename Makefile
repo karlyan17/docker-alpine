@@ -1,4 +1,4 @@
-ALPINE_VERSION:=3.9.0
+ALPINE_VERSION:=3.10.3
 DOCKER_ORG:=alpine
 DOCKER_IMAGE:=base
 
@@ -6,9 +6,7 @@ build: package
 	docker build -t $(DOCKER_ORG)/$(DOCKER_IMAGE) .
 
 get:
-	@if [ ! -f "alpine-rootfs.tar.gz" ]; then\
-		wget -O alpine-rootfs.tar.gz "http://dl-cdn.alpinelinux.org/alpine/v3.9/releases/x86_64/alpine-minirootfs-$(ALPINE_VERSION)-x86_64.tar.gz";\
-	fi
+	wget --verbose --output-document alpine-rootfs.tar.gz "http://dl-cdn.alpinelinux.org/alpine/latest-stable/releases/x86_64/alpine-minirootfs-$(ALPINE_VERSION)-x86_64.tar.gz";\
 
 package: get
 	mkdir -p -m 755 temp-rootfs
